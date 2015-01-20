@@ -1,0 +1,102 @@
+<html ng-app="vCacheBrowser">
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.9/angular.min.js"></script>
+		<script src="vcache.js"></script>
+		<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+	</head>
+  
+	<body>
+  
+		<div class="container">
+			<div class="row">
+			<div class="col-xs-12 text-center">
+  
+				<h1>Vcache Browser</h1>
+				
+				<div ng-controller="vCacheBrowserController">
+						
+					<form ng-submit="fetchResults()">
+						<input type="text" ng-model="stockRefInput"  size="30" placeholder="Stock Reference">
+						<input type="text" ng-model="registrationInput" ng-change="fetchResults()" size="30" placeholder="Vehicle Registration">
+					</form>
+					
+					
+					
+					<div class="row">
+						<div class="col-xs-3">
+							<a href="http://vcache.arnoldclark.com/imageserver/{{stockIdentifier}}/800/f" class="thumbnail"  data-toggle="modal" data-target="#myModal"><img src="http://vcache.arnoldclark.com/imageserver/{{stockIdentifier}}/350/f" class="img-responsive"></a>
+						</div>
+						<div class="col-xs-3">
+							<a href="#" class="thumbnail"><img src="http://vcache.arnoldclark.com/imageserver/{{stockIdentifier}}/350/r" class="img-responsive"></a>
+						</div>
+						<div class="col-xs-3">
+							<a href="#" class="thumbnail"><img src="http://vcache.arnoldclark.com/imageserver/{{stockIdentifier}}/350/I" class="img-responsive"></a>
+						</div>
+						<div class="col-xs-3">
+							<a href="#" class="thumbnail"><img src="http://vcache.arnoldclark.com/imageserver/{{stockIdentifier}}/350/4" class="img-responsive"></a>
+						</div>
+						<div class="col-xs-3">
+							<a href="#" class="thumbnail"><img src="http://vcache.arnoldclark.com/imageserver/{{stockIdentifier}}/350/5" class="img-responsive"></a>
+						</div>
+						<div class="col-xs-3">
+							<a href="#" class="thumbnail"><img src="http://vcache.arnoldclark.com/imageserver/{{stockIdentifier}}/350/6" class="img-responsive"></a>
+						</div>
+						<div class="col-xs-3">
+							<a href="#" class="thumbnail"><img src="http://vcache.arnoldclark.com/imageserver/{{stockIdentifier}}/350/7" class="img-responsive"></a>
+						</div>
+						<div class="col-xs-3">
+							<a href="#" class="thumbnail"><img src="http://vcache.arnoldclark.com/imageserver/{{stockIdentifier}}/350/8" class="img-responsive"></a>
+						</div>
+						<div class="col-xs-3">
+							<a href="#" class="thumbnail"><img src="http://vcache.arnoldclark.com/imageserver/{{stockIdentifier}}/350/9" class="img-responsive"></a>
+						</div>
+						<div class="col-xs-3">
+							<a href="#" class="thumbnail"><img src="http://vcache.arnoldclark.com/imageserver/{{stockIdentifier}}/350/10" class="img-responsive"></a>
+						</div>
+						<div class="col-xs-3">
+							<a href="http://vcache.arnoldclark.com/imageserver/{{stockIdentifier}}/800/11" class="thumbnail"><img src="http://vcache.arnoldclark.com/imageserver/{{stockIdentifier}}/350/11" class="img-responsive"></a>
+						</div>
+						<div class="col-xs-3">
+							<a href="http://vcache.arnoldclark.com/imageserver/{{stockIdentifier}}/800/12" class="thumbnail" data-toggle="modal" data-target="#myModal"><img src="http://vcache.arnoldclark.com/imageserver/{{stockIdentifier}}/350/12" class="img-responsive"></a>
+						</div>
+					</div>
+
+
+
+					<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					  <div class="modal-dialog">
+						<div class="modal-content">
+						  <div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title">{{stockIdentifier}}</h4>
+						  </div>
+						  <div class="modal-body">
+								<img src="http://vcache.arnoldclark.com/imageserver/{{stockIdentifier}}/800/f" class="img-responsive">
+						  </div>
+						  <div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						  </div>
+						</div><!-- /.modal-content -->
+					  </div><!-- /.modal-dialog -->
+					</div><!-- /.modal -->
+  
+  
+				</div>
+				
+			</div>
+			</div>
+		</div>
+		
+		
+    	<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+    	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+	</body>
+</html>
+<!-- Observations
+
+Images return based on vehicle registration, stock-ref seems irrelevant.
+
+vcache.arnoldclark.com/imageserver returns a status of 200 across any request.
+Ideally, inactive/missing images would return a 30x or 404 response. 
+
+-->
