@@ -2,19 +2,15 @@
 
  <head>
   <title>Arnold Clark vCache Browser</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.9/angular.min.js"></script>
   <script src="vcache.js"></script>
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://raw.github.com/daneden/animate.css/master/animate.css" rel="stylesheet">		
-  <style type="text/css">
-	.noMargin { margin: 0; }
-	.margin8 { margin-top: 8px; }
-	body { margin-top:70px; }
-  </style>
+  <style type="text/css">body { margin-top:70px; }</style>
  </head>
   
  <body>
-  <div ng-controller="vCacheBrowserController">
+  <div ng-controller="vCacheBrowserCtrl">
   
    <nav class="navbar navbar-default navbar-fixed-top" >
     <div class="container">
@@ -27,62 +23,50 @@
       </button>
       <a class="navbar-brand" href="#">vCache Browser</a>
      </div>
-     <div id="navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
-      <form class="noMargin" ng-submit="fetchResults()">
-       <div class="col-sm-3 col-md-2 margin8">
-        <input type="text" class="form-control" ng-model="stockRefInput" placeholder="Stock Reference">
-       </div>	
-       <div class="col-sm-3 col-md-2 margin8">
-        <input type="text" class="form-control" ng-model="registrationInput"  size="30" placeholder="Vehicle Registration">
-       </div>
-       <div class="col-sm-3 col-md-2 margin8">
-        <input class="btn btn-primary" type="submit" value="Load images ...">
-       </div>
+     <div class="navbar-collapse collapse" aria-expanded="false" id="navbar">
+     <form class="navbar-form navbar-left" role="search">
+      <div class="form-group">
+       <input type="text" class="form-control" ng-model="stockRefInput" ng-change="encodeInput()"  placeholder="Stock Reference">
+      </div>  
+      <div class="form-group">
+       <input type="text" class="form-control" ng-model="registrationInput" ng-change="encodeInput()" placeholder="Vehicle Registration">
+      </div>
       </form>
       <ul class="nav navbar-nav navbar-right">
-       <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Recent Vehicles <span class="caret"></span></a>
-        <ul class="dropdown-menu" role="menu">
-         <li><a href="#">Action</a></li>
-         <li><a href="#">Another action</a></li>
- 		<li><a href="#">Something else here</a></li>
-        </ul>
-       </li>
-      </ul>
+      	<li><a href="#/imgID/{{stockIdentifier}}">ID: {{stockIdentifier}}</a> </li>
+      </ul> 
      </div><!--/.nav-collapse -->
     </div>
    </nav>
-    
   
    <div class="container">
-   
     <div class="row" id="images">
      <div class="col-xs-6 col-sm-4" ng-repeat="variant in imageSources.variants track by $index">
-      <a href="http://vcache.arnoldclark.com/imageserver/{{stockIdentifier}}/800/{{variant}}" class="thumbnail"  data-toggle="modal" data-target="#myModal">
+      <a href class="thumbnail" data-toggle="modal" data-target="#bigPicture" ng-click="bigPicture(variant)">
        <img ng-src="http://vcache.arnoldclark.com/imageserver/{{stockIdentifier}}/350/{{variant}}" class="img-responsive" />
       </a>
      </div>
-    </div><!-- /.row #images-->
-
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-     <div class="modal-dialog">
-      <div class="modal-content">
-       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">{{stockIdentifier}}</h4>
-       </div>
-       <div class="modal-body">
-        <img ng-src="http://vcache.arnoldclark.com/imageserver/{{stockIdentifier}}/800/12" class="img-responsive">
-       </div>
-       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-       </div>
-      </div><!-- /.modal-content -->
-     </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
+    </div>
+   </div>
+    
+   <div class="modal fade" id="bigPicture" tabindex="-1" role="dialog" aria-labelledby="bigPictureModal" aria-hidden="true">
+    <div class="modal-dialog">
+     <div class="modal-content">
+      <div class="modal-header">
+       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+       <h4 class="modal-title">{{stockIdentifier}}/800/{{currentImage}}</h4>
+      </div>
+      <div class="modal-body">
+       <img ng-src="http://vcache.arnoldclark.com/imageserver/{{stockIdentifier}}/800/{{currentImage}}" class="img-responsive">
+      </div>
+      <div class="modal-footer">
+       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+     </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+   </div><!-- /.modal -->
   
-   </div><!-- /.container -->
-  </div><!-- / vCacheBrowserController -->
+  </div><!-- / vCacheBrowserCtrl -->
 		
  <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
