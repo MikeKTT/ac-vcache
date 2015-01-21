@@ -12,7 +12,7 @@ angular.module('vCacheBrowser', [])
 		// Reset and prepare array / variables
 		$scope.registrationInput = $scope.registrationInput.replace(/\s+/g, '').toUpperCase();
 		
-		var stockRef = ($scope.stockRefInput.length < 10 ? "XXXXX-XXXX" : $scope.stockRefInput).split("");
+		var stockRef = ($scope.stockRefInput.length < 9 ? "XXXXX-XXXX" : $scope.stockRefInput).split("");
 		var regReverse = $scope.registrationInput.split("").reverse();
 		var pointer = 0;
 		$scope.stockIdentifier = "";
