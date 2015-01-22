@@ -1,4 +1,4 @@
-angular.module('vCacheBrowser', [])
+var vCB = angular.module('vCacheBrowser', [])
   .controller('vCacheBrowserCtrl', ['$scope', function($scope) {
   
   	// Define default values and data
@@ -9,9 +9,11 @@ angular.module('vCacheBrowser', [])
 
   	// Encode a stock reference & registration and set stockIdentifier
     $scope.encodeInput = function() {
+    
 		// Reset and prepare array / variables
+		$scope.stockRefInput = $scope.stockRefInput.replace(/\s+/g, '').toUpperCase();
 		$scope.registrationInput = $scope.registrationInput.replace(/\s+/g, '').toUpperCase();
-		
+	
 		var stockRef = ($scope.stockRefInput.length < 9 ? "XXXXX-XXXX" : $scope.stockRefInput).split("");
 		var regReverse = $scope.registrationInput.split("").reverse();
 		var pointer = 0;
@@ -24,7 +26,7 @@ angular.module('vCacheBrowser', [])
 		}, regReverse);
 
 		// Append the 9th character
-		$scope.stockIdentifier = ($scope.stockIdentifier+stockRef[8]).toUpperCase();
+		$scope.stockIdentifier = ($scope.stockIdentifier+stockRef[8]);
     };
     
     $scope.bigPicture = function(variantID) {
